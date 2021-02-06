@@ -1,0 +1,13 @@
+PREFIX ns: <http://www.semanticweb.org/alicia/ontologies/2021/0/CSC5003-DishesAndIngredients#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT distinct ?dish ?ing ?ing2
+WHERE {
+	?dish ns:hasIngredient ?ing.
+	?dish ns:hasIngredient ?ing2.
+	?dish rdf:type ns:CheapDish.
+	?ing ns:hasPrice "expensive"^^ns:price.
+	?ing2 ns:hasPrice "expensive"^^ns:price.
+	#equals(?ing1,ing2).
+	FILTER (?ing != ?ing2)
+}

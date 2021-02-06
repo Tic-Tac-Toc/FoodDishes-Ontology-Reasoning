@@ -1,0 +1,13 @@
+@prefix ns: <http://www.semanticweb.org/alicia/ontologies/2021/0/CSC5003-DishesAndIngredients#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+
+[ruleSpicedDish: (?dish rdf:type ns:Dish) (?dish ns:hasIngredient ?ing) (?ing ns:hasSpiceness "hot"^^ns:spiceness)   ->  (?dish rdf:type ns:SpicedDish)]
+[ruleSweetDish: (?dish rdf:type ns:Dish) (?dish ns:hasIngredient ?ing) (?ing ns:hasTaste "sweet"^^ns:taste)   ->  (?dish rdf:type ns:SweetDish)]
+[ruleSalty: (?dish rdf:type ns:Dish) noValue(?dish rdf:type ns:SweetDish)-> (?dish rdf:type ns:SaltyDish)]
+[ruleFruityDish: (?dish rdf:type ns:Dish) (?dish ns:hasIngredient ?ing1) (?dish ns:hasIngredient ?ing2) (?ing1 rdf:type ns:fruit) (?ing2 rdf:type ns:fruit) notEqual(?ing1, ?ing2)-> (?dish rdf:type ns:FruityDish)]
+[ruleExpensive: (?dish rdf:type ns:Dish) (?dish ns:hasIngredient ?ing1) (?dish ns:hasIngredient ?ing2) (?ing1 ns:hasPrice "expensive"^^ns:price) (?ing2 ns:hasPrice "expensive"^^ns:price) notEqual(?ing1, ?ing2)-> (?dish rdf:type ns:ExpensiveDish)]
+[ruleCheap: (?dish rdf:type ns:Dish) noValue(?dish rdf:type ns:ExpensiveDish)-> (?dish rdf:type ns:CheapDish)]
+[ruleCalorific: (?dish rdf:type ns:Dish) (?dish ns:hasIngredient ?ing) (?ing ns:isCalorific "calorific"^^ns:calories)   ->  (?dish rdf:type ns:CalorificDish)]
